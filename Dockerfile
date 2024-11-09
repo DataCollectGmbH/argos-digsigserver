@@ -1,4 +1,6 @@
-FROM l4t-release:35.6.0 AS l4t-35.6.0
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} AS final-image
+
 
 
 # Dependencies for building u-boot tools
@@ -39,7 +41,7 @@ ENV DIGSIGSERVER_KEYFILE_URI=${DIGSIGSERVER}
 WORKDIR ${DIGSIGSERVER}
 
 
-COPY --from=l4t-35.6.0 /opt/nvidia /opt/nvidia
+COPY --from=final-image /opt/nvidia /opt/nvidia
 
 
 COPY digsigserver ${DIGSIGSERVER}/digsigserver
