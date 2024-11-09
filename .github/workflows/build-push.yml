@@ -57,8 +57,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args:
-            BASE_IMAGE: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BASE }}:${{ steps.meta.outputs.tags }}
+          build-args: BASE_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BASE }}:${{ steps.meta.outputs.tags }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
 
