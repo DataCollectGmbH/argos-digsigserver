@@ -6,6 +6,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
+  IMAGE_NAME_BASE: datacollectgmbh/yocto-build-container-base
   IMAGE_NAME: datacollectgmbh/argos-digsigserver
 
 jobs:
