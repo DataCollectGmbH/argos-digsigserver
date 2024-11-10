@@ -6,7 +6,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: datacollectgmbh/Docker-base-image-digsigserver
+  IMAGE_NAME: datacollectgmbh/docker-base-image-digsigserver
   TAG: l4t-r35.6.0
 
 jobs:
