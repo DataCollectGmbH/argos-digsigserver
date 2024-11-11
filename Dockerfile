@@ -54,13 +54,10 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     && unzip awscliv2.zip \
     &&./aws/install
 
-############################################
-RUN echo "Logging into AWS..."
-RUN aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID \
-    && aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY \
-    && aws configure set default.region $AWS_DEFAULT_REGION
-############################################
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chnod +x /entrypoint.sh
 
+ENTRYPOINT ["/entrypoint.sh"]
 
 CMD [ "digsigserver", "--debug" ]
