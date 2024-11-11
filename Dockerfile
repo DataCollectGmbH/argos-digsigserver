@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
   python3.7-dev \
   python3-pip \
   sbsigntool \
+  zip \
   && rm -rf /var/lib/apt/lists/*
 
 RUN update-alternatives --install /usr/bin/python  python  /usr/bin/python2.7 1
@@ -46,8 +47,19 @@ COPY setup.py ${DIGSIGSERVER}
 
 RUN pip3 install -e .
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+############# Install aws ###################
 
-ENTRYPOINT ["/entrypoint.sh"]
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+./aws/install
+
+############################################
+echo "Logging into AWS..."
+aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+aws configure set default.region $AWS_DEFAULT_REGION
+############################################
+
+
+
 CMD [ "digsigserver", "--debug" ]
