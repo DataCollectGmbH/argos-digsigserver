@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
   python3-pip \
   sbsigntool \
   zip \
+  curl \
   && rm -rf /var/lib/apt/lists/*
 
 RUN update-alternatives --install /usr/bin/python  python  /usr/bin/python2.7 1
