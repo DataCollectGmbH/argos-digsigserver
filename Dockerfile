@@ -35,7 +35,7 @@ WORKDIR ${DIGSIGSERVER}
 
 
 COPY --from=l4t-35.6.0 /opt/nvidia /opt/nvidia
-COPY docker/start_script.sh /start_script.sh
+COPY start_script.sh /start_script.sh
 
 RUN chmod +x /start_script.sh
 
