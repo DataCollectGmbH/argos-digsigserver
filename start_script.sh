@@ -11,4 +11,4 @@ export DIGSIGSERVER_KEYFILE_URI="s3://tegrasign"
 # Add other commands you want to run after startup here
 
 # Keep the container running with a bash session
-exec bash
+exec digsigserver --debug
