@@ -1,5 +1,5 @@
 FROM ghcr.io/datacollectgmbh/docker-base-image-digsigserver:l4t-r35.6.0 AS l4t-35.6.0
-FROM ghcr.io/datacollectgmbh/docker-base-image-digsigserver:l4t-r36.4.0 AS l4t-36.4.0
+FROM Dockerfile.l4t-r36.4.0 AS l4t-36.4.0
 FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y \
