@@ -8,7 +8,7 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: datacollectgmbh/docker-final-image-digsigserver
   IMAGE_BASE_NAME: datacollectgmbh/argos-digsigserver
-  TAG: l4t-r35.6.0
+  TAG: l4t-r36.4.0
 
 jobs:
   build:
@@ -49,7 +49,7 @@ jobs:
       - name: Build and push Base Image
         uses: docker/build-push-action@v5
         with:
-          file: Dockerfile.l4t-35.6.0
+          file: Dockerfile.l4t-36.4.0
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_BASE_NAME }}:${{ env.TAG }}  # Push the custom tag
