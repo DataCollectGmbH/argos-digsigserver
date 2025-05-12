@@ -1,5 +1,5 @@
-FROM ghcr.io/datacollectgmbh/docker-base-image-digsigserver:l4t-r35.6.0 AS l4t-35.6.0
-FROM ghcr.io/datacollectgmbh/argos-digsigserver:l4t-r36.4.0 AS l4t-36.4.0
+FROM ghcr.io/datacollectgmbh/l4t-release:l4t-r35.6.0 AS l4t-35.6.0
+FROM ghcr.io/datacollectgmbh/l4t-release:l4t-r36.4.0 AS l4t-36.4.0
 FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y \
@@ -24,9 +24,7 @@ RUN pip3 install \
   awscli \
   pycryptodome
 
-#RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
-#    unzip awscliv2.zip \
-#    ./aws/install
+
 
 ENV DIGSIGSERVER=/digsigserver
 ENV DIGSIGSERVER_KEYFILE_URI=${DIGSIGSERVER}
