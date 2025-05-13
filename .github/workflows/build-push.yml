@@ -10,6 +10,7 @@ env:
   IMAGE_BASE_NAME: datacollectgmbh/l4t-release
   TAG_L4T_35_6_0: l4t-r35.6.0
   TAG_L4T_36_4_0: l4t-r36.4.0
+  TAG_FINAL_IMAGE: latest
 
 jobs:
   build:
@@ -31,7 +32,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.TOKEN }}
 
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
@@ -57,7 +58,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_BASE_NAME }}:buildcache
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_BASE_NAME }}:buildcache,mode=max
-      - name: Build and push Base Image L4T 35.6.0
+      - name: Build and push Base Image L4T 36.4.0
         uses: docker/build-push-action@v5
         with:
           file: Dockerfile.l4t-36.4.0
@@ -75,7 +76,7 @@ jobs:
           file: Dockerfile
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest  # Push the custom tag
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}  # Push the custom tag
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
