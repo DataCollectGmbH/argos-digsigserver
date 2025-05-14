@@ -10,6 +10,7 @@ env:
   IMAGE_BASE_NAME: datacollectgmbh/l4t-release
   TAG_L4T_35_6_0: l4t-r35.6.0
   TAG_L4T_36_4_0: l4t-r36.4.0
+  TAG_L4T_36_4_3: l4t-r36.4.3
   TAG_FINAL_IMAGE: latest
 
 jobs:
@@ -67,7 +68,17 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_BASE_NAME }}:${{ env.TAG_L4T_36_4_0 }}  # Push the custom tag
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_BASE_NAME }}:buildcache
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_BASE_NAME }}:buildcache,mode=max          
+          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_BASE_NAME }}:buildcache,mode=max
+      - name: Build and push Base Image L4T 36.4.3
+        uses: docker/build-push-action@v5
+        with:
+          file: Dockerfile.l4t-36.4.3
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_BASE_NAME }}:${{ env.TAG_L4T_36_4_3 }}  # Push the custom tag
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_BASE_NAME }}:buildcache
+          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_BASE_NAME }}:buildcache,mode=max               
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Final Image

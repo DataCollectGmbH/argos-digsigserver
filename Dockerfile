@@ -1,5 +1,6 @@
 FROM ghcr.io/datacollectgmbh/l4t-release:l4t-r35.6.0 AS l4t-35.6.0
 FROM ghcr.io/datacollectgmbh/l4t-release:l4t-r36.4.0 AS l4t-36.4.0
+FROM ghcr.io/datacollectgmbh/l4t-release:l4t-r36.4.3 AS l4t-36.4.3
 FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y \
@@ -35,6 +36,7 @@ WORKDIR ${DIGSIGSERVER}
 
 COPY --from=l4t-35.6.0 /opt/nvidia /opt/nvidia
 COPY --from=l4t-36.4.0 /opt/nvidia /opt/nvidia
+COPY --from=l4t-36.4.3 /opt/nvidia /opt/nvidia
 COPY start_script.sh /start_script.sh
 
 RUN chmod +x /start_script.sh
